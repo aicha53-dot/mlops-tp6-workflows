@@ -14,3 +14,6 @@ mlruns/
 
 # ATTENTION : pas de data/, models/ ni reports/ ici
 # DVC s'en charge
+
+# Environnement virtuel WSL2
+.venv-wsl/

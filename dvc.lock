@@ -1,0 +1,83 @@
+schema: '2.0'
+stages:
+  preparer:
+    cmd: python src/preparer.py
+    deps:
+    - path: data/transactions.csv
+      hash: md5
+      md5: cf9f6f86c141e7df32c61715c493483f
+      size: 85902
+      isexec: true
+    - path: src/preparer.py
+      hash: md5
+      md5: cbf6b4b2129ac9904696d786fc077636
+      size: 630
+      isexec: true
+    params:
+      params.yaml:
+        preparation.random_state: 42
+        preparation.test_size: 0.25
+    outs:
+    - path: data/prepare/test.csv
+      hash: md5
+      md5: 122853821ed3c1d9696f49a91fb89cb6
+      size: 20275
+      isexec: true
+    - path: data/prepare/train.csv
+      hash: md5
+      md5: 87ad820ee8fa3afa83f2b58186a70ed8
+      size: 60666
+      isexec: true
+  entrainer:
+    cmd: python src/entrainer.py
+    deps:
+    - path: data/prepare/train.csv
+      hash: md5
+      md5: 87ad820ee8fa3afa83f2b58186a70ed8
+      size: 60666
+      isexec: true
+    - path: src/entrainer.py
+      hash: md5
+      md5: 867c29ce1628ebd570ab9f25eb702c2f
+      size: 621
+      isexec: true
+    params:
+      params.yaml:
+        entrainement.max_depth: 12
+        entrainement.n_estimators: 300
+        entrainement.random_state: 42
+    outs:
+    - path: models/model.pkl
+      hash: md5
+      md5: 062e931bc3a65b44c5daecfcd89d2751
+      size: 8145273
+      isexec: true
+  evaluer:
+    cmd: python src/evaluer.py
+    deps:
+    - path: data/prepare/test.csv
+      hash: md5
+      md5: 122853821ed3c1d9696f49a91fb89cb6
+      size: 20275
+      isexec: true
+    - path: models/model.pkl
+      hash: md5
+      md5: 062e931bc3a65b44c5daecfcd89d2751
+      size: 8145273
+      isexec: true
+    - path: src/evaluer.py
+      hash: md5
+      md5: 58de087e4f79e63389b561ea052c8fbb
+      size: 881
+      isexec: true
+    outs:
+    - path: reports/confusion.png
+      hash: md5
+      md5: c543c3d8e8d9cd971cc1eb53fc2e4dda
+      size: 14108
+      isexec: true
+    - path: reports/metrics.json
+      hash: md5
+      md5: 57075023526c454eb2e9b614e460c005
+      size: 61
+      isexec: true
