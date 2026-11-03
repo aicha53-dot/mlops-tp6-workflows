@@ -35,12 +35,10 @@ stages:
       hash: md5
       md5: 372147b3f3d44c367c72237196f504fd
       size: 85003
-      isexec: true
     - path: src/entrainer.py
       hash: md5
       md5: 867c29ce1628ebd570ab9f25eb702c2f
       size: 621
-      isexec: true
     params:
       params.yaml:
         entrainement.max_depth: 12
@@ -49,9 +47,8 @@ stages:
     outs:
     - path: models/model.pkl
       hash: md5
-      md5: aa5a76815781049aafa3f5bccf4b9d66
-      size: 11316953
-      isexec: true
+      md5: 9ce971ca88a4648b3e4bbac364c70300
+      size: 11316921
   evaluer:
     cmd: python src/evaluer.py
     deps:
@@ -59,25 +56,20 @@ stages:
       hash: md5
       md5: 9248f36f884983bae09734d5e9fa4afc
       size: 28440
-      isexec: true
     - path: models/model.pkl
       hash: md5
-      md5: aa5a76815781049aafa3f5bccf4b9d66
-      size: 11316953
-      isexec: true
+      md5: 9ce971ca88a4648b3e4bbac364c70300
+      size: 11316921
     - path: src/evaluer.py
       hash: md5
       md5: 58de087e4f79e63389b561ea052c8fbb
       size: 881
-      isexec: true
     outs:
     - path: reports/confusion.png
       hash: md5
-      md5: da97dbf34871620c8fc95338132bf120
-      size: 16469
-      isexec: true
+      md5: 5a321b87e889fa1829b5d8128d10d6a4
+      size: 15463
     - path: reports/metrics.json
       hash: md5
-      md5: ac489100e2e656999316013d26c7a480
-      size: 61
-      isexec: true
+      md5: 05d8bb55c024ba339b2d04c8aed35a99
+      size: 65
